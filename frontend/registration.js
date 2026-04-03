@@ -15,11 +15,9 @@ const formData = {
 // DOM Elements
 const step1Form = document.getElementById('step1-input');
 const step2Form = document.getElementById('step2-input');
-const step3Form = document.getElementById('step3-input');
 const step1Wrapper = document.getElementById('step1-form');
 const step2Wrapper = document.getElementById('step2-form');
-const step3Wrapper = document.getElementById('step3-form');
-const successPage = document.getElementById('successPage');
+const profilePage = document.getElementById('profilePage');
 const errorPage = document.getElementById('errorPage');
 const progressFill = document.getElementById('progressFill');
 
@@ -460,11 +458,11 @@ step2Form?.addEventListener('submit', function(e) {
             securityA2: securityA2
         };
 
-        registerUserAndSendOtp();
+        registerUser();
     }
 });
 
-async function registerUserAndSendOtp() {
+async function registerUser() {
     try {
         const payload = {
             email: formData.personalInfo.email,
@@ -486,24 +484,11 @@ async function registerUserAndSendOtp() {
         const data = await response.json();
 
         if (!response.ok || !data.success) {
-            throw new Error(data.message || 'Registration API failed');
+            throw new Error(data.message || 'Registration failed');
         }
 
-        // send otp
-        const otpResponse = await fetch(API_BASE_URL + '/users/send-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: formData.personalInfo.email })
-        });
-        const otpData = await otpResponse.json();
-
-        if (!otpResponse.ok || !otpData.success) {
-            throw new Error(otpData.message || 'OTP API failed');
-        }
-
-        // Move to step 3 (OTP confirmation)
-        showNotification('OTP sent. Enter the code to verify');
-        moveToStep(3);
+        // Registration successful - show profile
+        showProfile();
     } catch (error) {
         showError(error.message);
     }
@@ -516,148 +501,6 @@ document.getElementById('backStep2')?.addEventListener('click', function() {
 });
 
 // ============================================
-// STEP 3: VERIFICATION
-// ============================================
-
-// OTP Input handling
-const otpInputs = document.querySelectorAll('.otp-input');
-
-otpInputs.forEach((input, index) => {
-    input.addEventListener('input', function(e) {
-        // Move to next input on digit entry
-        if (e.target.value.length === 1) {
-            if (index < otpInputs.length - 1) {
-                otpInputs[index + 1].focus();
-            }
-        }
-    });
-    
-    input.addEventListener('keydown', function(e) {
-        // Handle backspace
-        if (e.key === 'Backspace' && this.value === '') {
-            if (index > 0) {
-                otpInputs[index - 1].focus();
-            }
-        }
-    });
-    
-    input.addEventListener('paste', function(e) {
-        e.preventDefault();
-        const pastedData = e.clipboardData.getData('text');
-        const digits = pastedData.replace(/[^0-9]/g, '');
-        
-        digits.split('').forEach((digit, i) => {
-            if (i + index < otpInputs.length) {
-                otpInputs[i + index].value = digit;
-            }
-        });
-    });
-});
-
-// Resend OTP functionality
-let otpTimer = 60;
-let resendOtpBtn = document.getElementById('resendOtp');
-let timerDisplay = document.getElementById('otpTimer');
-
-function startTimer() {
-    otpTimer = 60;
-    resendOtpBtn.disabled = true;
-    
-    const timerInterval = setInterval(() => {
-        otpTimer--;
-        timerDisplay.textContent = `Resend in ${otpTimer}s`;
-        
-        if (otpTimer <= 0) {
-            clearInterval(timerInterval);
-            resendOtpBtn.disabled = false;
-            timerDisplay.textContent = '';
-        }
-    }, 1000);
-}
-
-resendOtpBtn?.addEventListener('click', function(e) {
-    e.preventDefault();
-    // Clear OTP inputs
-    otpInputs.forEach(input => input.value = '');
-    otpInputs[0].focus();
-    
-    showNotification('New OTP sent to your phone');
-    startTimer();
-});
-
-// Start timer on page load for step 3
-if (step3Wrapper && !step3Wrapper.classList.contains('hidden')) {
-    startTimer();
-}
-
-// Step 3 Form Submission
-step3Form?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Collect OTP
-    let otp = '';
-    otpInputs.forEach(input => {
-        otp += input.value;
-    });
-    
-    const otpError = document.getElementById('otpError');
-    const dataConfirmError = document.getElementById('dataConfirmError');
-    const dataConfirm = document.getElementById('dataConfirm');
-    
-    if (otp.length !== 6) {
-        otpError.textContent = 'Please enter a valid 6-digit OTP';
-        otpError.classList.add('show');
-        otpInputs.forEach(input => input.classList.add('error'));
-        return;
-    }
-    
-    if (!dataConfirm.checked) {
-        dataConfirmError.textContent = 'Please confirm your information';
-        dataConfirmError.classList.add('show');
-        return;
-    }
-    
-    otpError.classList.remove('show');
-    dataConfirmError.classList.remove('show');
-    otpInputs.forEach(input => input.classList.remove('error'));
-
-    verifyOtpAndCompleteRegistration(otp);
-});
-
-async function verifyOtpAndCompleteRegistration(otp) {
-    try {
-        const response = await fetch(API_BASE_URL + '/users/verify-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: formData.personalInfo.email,
-                otp: otp
-            })
-        });
-        const data = await response.json();
-
-        if (!response.ok || !data.success) {
-            throw new Error(data.message || 'OTP verification failed');
-        }
-
-        formData.verification = {
-            otp: otp,
-            confirmed: true,
-            registrationTime: new Date().toISOString()
-        };
-
-        showSuccess();
-    } catch (error) {
-        showError(error.message);
-    }
-}
-
-// Back button for Step 3
-document.getElementById('backStep3')?.addEventListener('click', function() {
-    moveToStep(2);
-});
-
-// ============================================
 // STEP NAVIGATION
 // ============================================
 
@@ -665,8 +508,7 @@ function moveToStep(step) {
     // Hide all forms
     step1Wrapper.classList.add('hidden');
     step2Wrapper.classList.add('hidden');
-    step3Wrapper.classList.add('hidden');
-    successPage.classList.add('hidden');
+    profilePage.classList.add('hidden');
     errorPage.classList.add('hidden');
     
     // Show target form
@@ -674,13 +516,10 @@ function moveToStep(step) {
         step1Wrapper.classList.remove('hidden');
     } else if (step === 2) {
         step2Wrapper.classList.remove('hidden');
-    } else if (step === 3) {
-        step3Wrapper.classList.remove('hidden');
-        startTimer();
     }
     
-    // Update progress bar
-    progressFill.style.width = (step * 33.33) + '%';
+    // Update progress bar (50% per step for 2 steps)
+    progressFill.style.width = ((step - 1) * 50) + '%';
     
     // Update step indicators
     document.querySelectorAll('.step').forEach((stepEl, index) => {
@@ -730,7 +569,7 @@ function simulateRegistration() {
         registerBtn.disabled = false;
 
         if (data.success) {
-            showSuccess();
+            showProfile();
         } else {
             showError(data.message || 'Registration failed.');
         }
@@ -742,22 +581,26 @@ function simulateRegistration() {
     });
 }
 
-function showSuccess() {
-    // Update success page with user info
-    document.getElementById('successName').textContent = formData.personalInfo.fullName;
-    document.getElementById('successEmail').textContent = formData.personalInfo.email;
+function showProfile() {
+    // Update profile page with user info
+    document.getElementById('profileName').textContent = formData.personalInfo.fullName;
+    document.getElementById('profileFullName').textContent = formData.personalInfo.fullName;
+    document.getElementById('profileEmail').textContent = formData.personalInfo.email;
+    document.getElementById('profilePhone').textContent = formData.personalInfo.phone;
+    document.getElementById('profileAadhar').textContent = formData.personalInfo.aadhar;
+    document.getElementById('profileSecurityQ1').textContent = formData.security.securityQ1;
+    document.getElementById('profileSecurityQ2').textContent = formData.security.securityQ2;
     
-    // Hide all forms and show success
+    // Hide all forms and show profile
     step1Wrapper.classList.add('hidden');
     step2Wrapper.classList.add('hidden');
-    step3Wrapper.classList.add('hidden');
     errorPage.classList.add('hidden');
-    successPage.classList.remove('hidden');
+    profilePage.classList.remove('hidden');
     
-    // Reset progress bar
+    // Complete progress bar
     progressFill.style.width = '100%';
     
-    // Log registration data (in real app, would send to server)
+    // Log registration data
     console.log('Registration Data:', formData);
     
     // Scroll to top
@@ -769,8 +612,7 @@ function showError(message) {
     
     step1Wrapper.classList.add('hidden');
     step2Wrapper.classList.add('hidden');
-    step3Wrapper.classList.add('hidden');
-    successPage.classList.add('hidden');
+    profilePage.classList.add('hidden');
     errorPage.classList.remove('hidden');
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -803,6 +645,11 @@ document.getElementById('retryRegistration')?.addEventListener('click', function
 // Go to Adopt
 document.getElementById('goToAdopt')?.addEventListener('click', function() {
     window.location.href = 'index.html#adopt';
+});
+
+// Edit Profile
+document.getElementById('editProfile')?.addEventListener('click', function() {
+    showNotification('Profile editing feature coming soon!');
 });
 
 // ============================================

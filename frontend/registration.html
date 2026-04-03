@@ -37,11 +37,7 @@
             </div>
             <div class="step" id="step2">
                 <span class="step-number">2</span>
-                <span class="step-label">Security</span>
-            </div>
-            <div class="step" id="step3">
-                <span class="step-number">3</span>
-                <span class="step-label">Verification</span>
+                <span class="step-label">Security & Profile</span>
             </div>
         </div>
     </div>
@@ -316,48 +312,70 @@
         </form>
     </div>
 
-    <!-- Success Page -->
-    <div class="success-container hidden" id="successPage">
-        <div class="success-card">
-            <div class="success-icon">🎉</div>
-            <h1>Registration Successful!</h1>
-            <p>Welcome to PawsAdopt, <span id="successName"></span>!</p>
-            
-            <div class="success-details">
-                <div class="detail-item">
-                    <span class="detail-icon">✓</span>
-                    <div>
-                        <h3>Account Created</h3>
-                        <p>Your account has been successfully registered</p>
+    <!-- Profile Page -->
+    <div class="profile-container hidden" id="profilePage">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <span class="avatar-icon">👤</span>
+                </div>
+                <h1>Welcome, <span id="profileName"></span>!</h1>
+                <p>Your account has been created successfully</p>
+            </div>
+
+            <div class="profile-details">
+                <div class="detail-section">
+                    <h3>📋 Personal Information</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>Full Name:</label>
+                            <span id="profileFullName"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Email:</label>
+                            <span id="profileEmail"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Phone:</label>
+                            <span id="profilePhone"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Aadhar Number:</label>
+                            <span id="profileAadhar"></span>
+                        </div>
                     </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-icon">📧</span>
-                    <div>
-                        <h3>Confirmation Email</h3>
-                        <p>A confirmation email has been sent to <span id="successEmail"></span></p>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-icon">📱</span>
-                    <div>
-                        <h3>Account Verified</h3>
-                        <p>Your phone number has been verified and secured</p>
+
+                <div class="detail-section">
+                    <h3>🔐 Security Questions</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label>Question 1:</label>
+                            <span id="profileSecurityQ1"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label>Question 2:</label>
+                            <span id="profileSecurityQ2"></span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="success-buttons">
+            <div class="profile-actions">
                 <a href="index.html" class="btn-home">
                     <span>🏠 Back to Home</span>
                 </a>
                 <button type="button" class="btn-adopt" id="goToAdopt">
                     <span>🐾 Start Adopting</span>
                 </button>
+                <button type="button" class="btn-edit" id="editProfile">
+                    <span>✏️ Edit Profile</span>
+                </button>
             </div>
 
-            <div class="security-info">
-                <p>🔒 Your data is protected with industry-standard encryption</p>
+            <div class="profile-notice">
+                <p>🔒 Your profile information is secure and encrypted</p>
+                <p>📧 A confirmation email has been sent to your registered email address</p>
             </div>
         </div>
     </div>
