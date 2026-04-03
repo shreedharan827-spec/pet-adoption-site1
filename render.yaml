@@ -1,7 +1,7 @@
 services:
-  - type: static
+  - type: web
     name: pet-adoption-backend
-    env: java
+    env: static
     plan: free
     buildCommand: cd backend && mvn clean package -DskipTests
     startCommand: java -jar backend/target/paws-adopt-backend-1.0.0.jar
