@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawsAdopt - Find Your Perfect Pet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="logo">
+            <span class="logo-icon"></span>
+            <span class="logo-text">PawsAdopt</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#adopt" class="nav-link">Adopt</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="registration.html" class="nav-link">Register</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">Find Your Perfect Companion</h1>
+        <p class="hero-subtitle">Give a loving pet a forever home</p>
+        <button class="cta-button">Start Exploring</button>
+    </div>
+    <div class="hero-animation">
+        <div class="floating-paw">🐾</div>
+        <div class="floating-paw" style="animation-delay: 1s;">🐱</div>
+        <div class="floating-paw" style="animation-delay: 2s;">🐶</div>
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="filter-section">
+    <h2>Find Your Pet</h2>
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All Pets</button>
+        <button class="filter-btn" data-filter="dog">🐶 Dogs</button>
+        <button class="filter-btn" data-filter="cat">🐱 Cats</button>
+        <button class="filter-btn" data-filter="rabbit">🐰 Rabbits</button>
+        <button class="filter-btn" data-filter="bird">🦜 Birds</button>
+    </div>
+</section>
+
+<!-- Adoption Cards Section -->
+<section id="adopt" class="pets-section">
+    <div class="pets-container">
+        <!-- Pet Card 1 -->
+        <div class="pet-card" data-pet="dog">
+            <div class="pet-image-wrapper">
+                <img class="pet-image dog-img" src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=80" alt="Golden Retriever dog">
+                <div class="pet-badge">Dog</div>
+            </div>
+            <div class="pet-info">
+                <h3 class="pet-name">Max</h3>
+                <p class="pet-breed">Golden Retriever</p>
+                <p class="pet-description">Friendly and energetic, loves to play fetch!</p>
+                <div class="pet-details">
+                    <span class="detail-item">3 years old</span>
+                    <span class="detail-item">Male</span>
+                </div>
+                <button class="adopt-btn">Adopt Max</button>
+            </div>
+        </div>
+
+        <!-- Pet Card 2 -->
+        <div class="pet-card" data-pet="cat">
+            <div class="pet-image-wrapper">
+                <img class="pet-image cat-img" src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=80" alt="Cat pet">
+                <div class="pet-badge">Cat</div>
+            </div>
+            <div class="pet-info">
+                <h3 class="pet-name">Luna</h3>
+                <p class="pet-breed">Siamese Mix</p>
+                <p class="pet-description">Elegant and affectionate, perfect companion</p>
+                <div class="pet-details">
+                    <span class="detail-item">2 years old</span>
+                    <span class="detail-item">Female</span>
+                </div>
+                <button class="adopt-btn">Adopt Luna</button>
+            </div>
+        </div>
+
+        <!-- Pet Card 3 -->
+        <div class="pet-card" data-pet="dog">
+            <div class="pet-image-wrapper">
+                <img class="pet-image dog-img" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=800&q=80" alt="Dog pet">
+                <div class="pet-badge">Dog</div>
+            </div>
+            <div class="pet-info">
+                <h3 class="pet-name">Rocky</h3>
+                <p class="pet-breed">Husky</p>
+                <p class="pet-description">Adventurous spirit, loves outdoor activities</p>
+                <div class="pet-details">
+                    <span class="detail-item">1 year old</span>
+                    <span class="detail-item">Male</span>
+                </div>
+                <button class="adopt-btn">Adopt Rocky</button>
+            </div>
+        </div>
+
+        <!-- Pet Card 4 -->
+        <div class="pet-card" data-pet="rabbit">
+            <div class="pet-image-wrapper">
+                <img class="pet-image rabbit-img" src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=80" alt="Rabbit pet">
+                <div class="pet-badge">Rabbit</div>
+            </div>
+            <div class="pet-info">
+                <h3 class="pet-name">Bella</h3>
+                <p class="pet-breed">Holland Lop</p>
+                <p class="pet-description">Gentle and quiet, great for apartments</p>
+                <div class="pet-details">
+                    <span class="detail-item">1 year old</span>
+                    <span class="detail-item">Female</span>
+                </div>
+                <button class="adopt-btn">Adopt Bella</button>
+            </div>
+        </div>
+
+        <!-- Pet Card 5 -->
+        <div class="pet-card" data-pet="cat">
+            <div class="pet-image-wrapper">
+                <img class="pet-image cat-img" src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=80" alt="Cat pet">
+                <div class="pet-badge">Cat</div>
+            </div>
+            <div class="pet-info">
+                <h3 class="pet-name">Whiskers</h3>
+                <p class="pet-breed">Orange Tabby</p>
+                <p class="pet-description">Playful and curious, keeps you entertained</p>
+                <div class="pet-details">
+                    <span class="detail-item">4 years old</span>
+                    <span class="detail-item">Male</span>
+                </div>
+                <button class="adopt-btn">Adopt Whiskers</button>
+            </div>
+        </div>
+
+        <!-- Pet Card 6 -->
+        <div class="pet-card" data-pet="bird">
+            <div class="pet-image-wrapper">
+                <img class="pet-image bird-img" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Bird pet">
+                <div class="pet-badge">Bird</div>
+            </div>
+            <div class="pet-info">
+                <h3 class="pet-name">Polly</h3>
+                <p class="pet-breed">Parrot</p>
+                <p class="pet-description">Talkative and vibrant, full of personality</p>
+                <div class="pet-details">
+                    <span class="detail-item">5 years old</span>
+                    <span class="detail-item">Female</span>
+                </div>
+                <button class="adopt-btn">Adopt Polly</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="custom-pet" class="custom-pet-section">
+    <div class="custom-pet-container">
+        <h2>Add a Custom Pet Photo</h2>
+        <p>Upload your own dog, cat or other pet image and display it in the adoption list.</p>
+        <form id="custom-pet-form" class="custom-pet-form">
+            <input type="text" id="customPetName" placeholder="Pet Name" required>
+            <input type="text" id="customPetBreed" placeholder="Breed" required>
+            <select id="customPetType" required>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="rabbit">Rabbit</option>
+                <option value="bird">Bird</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="file" id="customPetPhoto" accept="image/*" required>
+            <small>Max file size: 5MB. Supported formats: JPG, PNG, GIF, WebP</small>
+        </form>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <h2>Why Adopt?</h2>
+    <div class="benefit-cards">
+        <div class="benefit-card">
+            <div class="benefit-icon">❤️</div>
+            <h3>Save Lives</h3>
+            <p>Every adoption saves a life and opens shelter space for another pet in need</p>
+        </div>
+        <div class="benefit-card">
+            <div class="benefit-icon">💰</div>
+            <h3>More Affordable</h3>
+            <p>Adoption fees are significantly lower than purchasing from breeders</p>
+        </div>
+        <div class="benefit-card">
+            <div class="benefit-icon">🏥</div>
+            <h3>Health Checked</h3>
+            <p>All our pets are vaccinated, neutered, and health screened</p>
+        </div>
+        <div class="benefit-card">
+            <div class="benefit-icon">🤝</div>
+            <h3>Support</h3>
+            <p>We provide ongoing support and guidance throughout the adoption process</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <h2>Get In Touch</h2>
+    <div class="contact-content">
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="contact-icon">📍</span>
+                <div>
+                    <h4>Address</h4>
+                    <p>no 76/4 valluvar nagar, T Nagar Chennai</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <div>
+                    <h4>Phone</h4>
+                    <p>+91 98765 43210</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <div>
+                    <h4>Email</h4>
+                    <p>pawsadopt@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2024 PawsAdopt. All rights reserved. | Give a pet a loving home today! 🐾</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

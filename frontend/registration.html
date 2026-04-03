@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawsAdopt - Registration & Security</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="logo">
+            <span class="logo-icon">🐾</span>
+            <span class="logo-text">PawsAdopt</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="registration.html" class="nav-link active-page">Register</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Registration Container -->
+<div class="registration-container">
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-steps">
+            <div class="step active" id="step1">
+                <span class="step-number">1</span>
+                <span class="step-label">Personal Info</span>
+            </div>
+            <div class="step" id="step2">
+                <span class="step-number">2</span>
+                <span class="step-label">Security</span>
+            </div>
+            <div class="step" id="step3">
+                <span class="step-number">3</span>
+                <span class="step-label">Verification</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Form - Step 1 -->
+    <div class="registration-form-wrapper" id="step1-form">
+        <div class="form-header">
+            <h1>Create Your Account</h1>
+            <p>Join PawsAdopt and find your perfect companion</p>
+        </div>
+
+        <form id="step1-input" class="registration-form">
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input 
+                    type="text" 
+                    id="fullName" 
+                    placeholder="Enter your full name" 
+                    required
+                    maxlength="50"
+                >
+                <span class="error-message" id="nameError"></span>
+                <div class="input-validator">
+                    <span class="validator-icon">✓</span>
+                    <span class="validator-text">Name is valid</span>
+                </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="Enter your email" 
+                    required
+                >
+                <span class="error-message" id="emailError"></span>
+                <div class="input-validator">
+                    <span class="validator-icon">✓</span>
+                    <span class="validator-text">Email is valid</span>
+                </div>
+            </div>
+
+            <!-- Phone Number Field -->
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="phone-group">
+                    <span class="phone-prefix">+91</span>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        placeholder="Enter 10-digit phone number" 
+                        required
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                    >
+                </div>
+                <span class="error-message" id="phoneError"></span>
+                <div class="input-validator">
+                    <span class="validator-icon">✓</span>
+                    <span class="validator-text">Phone number is valid</span>
+                </div>
+            </div>
+
+            <!-- Aadhar Number Field -->
+            <div class="form-group">
+                <label for="aadhar">Aadhar Number</label>
+                <input 
+                    type="text" 
+                    id="aadhar" 
+                    placeholder="Enter 12-digit Aadhar number" 
+                    required
+                    maxlength="12"
+                    pattern="[0-9]{12}"
+                >
+                <span class="error-message" id="aadharError"></span>
+                <div class="input-validator">
+                    <span class="validator-icon">✓</span>
+                    <span class="validator-text">Aadhar number is valid</span>
+                </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I agree to the Terms & Conditions and Privacy Policy</label>
+                <span class="error-message" id="termsError"></span>
+            </div>
+
+            <!-- Next Button -->
+            <button type="submit" class="btn-next">
+                <span>Next: Security Setup</span>
+                <span class="btn-icon">→</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- Security Panel - Step 2 -->
+    <div class="registration-form-wrapper hidden" id="step2-form">
+        <div class="form-header">
+            <h1>Security Setup</h1>
+            <p>Protect your account with a strong password and security questions</p>
+        </div>
+
+        <form id="step2-input" class="registration-form">
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Create Password</label>
+                <div class="password-wrapper">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="Minimum 8 characters" 
+                        required
+                        minlength="8"
+                    >
+                    <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+                </div>
+                <span class="error-message" id="passwordError"></span>
+                
+                <!-- Password Strength Indicator -->
+                <div class="password-strength">
+                    <div class="strength-bar" id="strengthBar"></div>
+                    <p class="strength-text" id="strengthText">Password strength: Weak</p>
+                </div>
+
+                <div class="password-requirements">
+                    <p>Password must contain:</p>
+                    <ul>
+                        <li id="req-length">✗ At least 8 characters</li>
+                        <li id="req-uppercase">✗ One uppercase letter (A-Z)</li>
+                        <li id="req-lowercase">✗ One lowercase letter (a-z)</li>
+                        <li id="req-number">✗ One number (0-9)</li>
+                        <li id="req-special">✗ One special character (!@#$%^&*)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        placeholder="Re-enter your password" 
+                        required
+                    >
+                    <button type="button" class="toggle-password" id="toggleConfirmPassword">👁️</button>
+                </div>
+                <span class="error-message" id="confirmPasswordError"></span>
+            </div>
+
+            <!-- Security Question 1 -->
+            <div class="form-group">
+                <label for="securityQ1">Security Question 1</label>
+                <select id="securityQ1" required>
+                    <option value="">Select a question</option>
+                    <option value="pet">What was your first pet's name?</option>
+                    <option value="city">What city were you born in?</option>
+                    <option value="school">What was your first school name?</option>
+                    <option value="movie">What is your favorite movie?</option>
+                    <option value="street">What street did you grow up on?</option>
+                </select>
+                <span class="error-message" id="securityQ1Error"></span>
+            </div>
+
+            <!-- Security Answer 1 -->
+            <div class="form-group">
+                <label for="securityA1">Your Answer</label>
+                <input 
+                    type="text" 
+                    id="securityA1" 
+                    placeholder="Answer your security question" 
+                    required
+                >
+                <span class="error-message" id="securityA1Error"></span>
+            </div>
+
+            <!-- Security Question 2 -->
+            <div class="form-group">
+                <label for="securityQ2">Security Question 2</label>
+                <select id="securityQ2" required>
+                    <option value="">Select a question</option>
+                    <option value="pet">What was your first pet's name?</option>
+                    <option value="city">What city were you born in?</option>
+                    <option value="school">What was your first school name?</option>
+                    <option value="movie">What is your favorite movie?</option>
+                    <option value="street">What street did you grow up on?</option>
+                </select>
+                <span class="error-message" id="securityQ2Error"></span>
+            </div>
+
+            <!-- Security Answer 2 -->
+            <div class="form-group">
+                <label for="securityA2">Your Answer</label>
+                <input 
+                    type="text" 
+                    id="securityA2" 
+                    placeholder="Answer your security question" 
+                    required
+                >
+                <span class="error-message" id="securityA2Error"></span>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="form-buttons">
+                <button type="button" class="btn-back" id="backStep2">
+                    <span class="btn-icon">←</span>
+                    <span>Back</span>
+                </button>
+                <button type="submit" class="btn-next">
+                    <span>Next: Verify</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Verification Panel - Step 3 -->
+    <div class="registration-form-wrapper hidden" id="step3-form">
+        <div class="form-header">
+            <h1>Verify Your Account</h1>
+            <p>Complete the verification process to finish registration</p>
+        </div>
+
+        <form id="step3-input" class="registration-form">
+            <!-- OTP Verification -->
+            <div class="form-group">
+                <label>OTP Verification</label>
+                <p class="info-text">We've sent a 6-digit OTP to your phone number</p>
+                <div class="otp-input-group">
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                    <input type="text" class="otp-input" maxlength="1" required>
+                </div>
+                <input type="hidden" id="otpValue">
+                <span class="error-message" id="otpError"></span>
+            </div>
+
+            <!-- Resend OTP -->
+            <div class="resend-otp">
+                <p>Didn't receive OTP? 
+                    <button type="button" id="resendOtp" class="link-btn">Resend OTP</button>
+                </p>
+                <span class="timer" id="otpTimer"></span>
+            </div>
+
+            <!-- Checkbox Confirmation -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="dataConfirm" required>
+                <label for="dataConfirm">I confirm that all the information provided is correct</label>
+                <span class="error-message" id="dataConfirmError"></span>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="form-buttons">
+                <button type="button" class="btn-back" id="backStep3">
+                    <span class="btn-icon">←</span>
+                    <span>Back</span>
+                </button>
+                <button type="submit" class="btn-register">
+                    <span>Complete Registration</span>
+                    <span class="btn-icon">✓</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Success Page -->
+    <div class="success-container hidden" id="successPage">
+        <div class="success-card">
+            <div class="success-icon">🎉</div>
+            <h1>Registration Successful!</h1>
+            <p>Welcome to PawsAdopt, <span id="successName"></span>!</p>
+            
+            <div class="success-details">
+                <div class="detail-item">
+                    <span class="detail-icon">✓</span>
+                    <div>
+                        <h3>Account Created</h3>
+                        <p>Your account has been successfully registered</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">📧</span>
+                    <div>
+                        <h3>Confirmation Email</h3>
+                        <p>A confirmation email has been sent to <span id="successEmail"></span></p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">📱</span>
+                    <div>
+                        <h3>Account Verified</h3>
+                        <p>Your phone number has been verified and secured</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-buttons">
+                <a href="index.html" class="btn-home">
+                    <span>🏠 Back to Home</span>
+                </a>
+                <button type="button" class="btn-adopt" id="goToAdopt">
+                    <span>🐾 Start Adopting</span>
+                </button>
+            </div>
+
+            <div class="security-info">
+                <p>🔒 Your data is protected with industry-standard encryption</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Page -->
+    <div class="error-container hidden" id="errorPage">
+        <div class="error-card">
+            <div class="error-icon">❌</div>
+            <h1>Registration Failed</h1>
+            <p id="errorMessage">There was an error during registration</p>
+            
+            <div class="error-actions">
+                <button type="button" class="btn-retry" id="retryRegistration">
+                    <span>🔄 Try Again</span>
+                </button>
+                <a href="index.html" class="btn-home">
+                    <span>🏠 Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Security Footer -->
+<footer class="footer registration-footer">
+    <p>🔒 Your information is encrypted and secure | © 2024 PawsAdopt. All rights reserved.</p>
+</footer>
+
+<script src="registration.js"></script>
+</body>
+</html>

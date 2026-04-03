@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: pet-adoption-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: pet_adoption_site
+      MYSQL_USER: pet_user
+      MYSQL_PASSWORD: Shree@1650!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - pet-adoption-network
+
+  backend:
+    build: .
+    container_name: pet-adoption-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DATABASE_URL=jdbc:mysql://mysql:3306/pet_adoption_site?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - DB_USERNAME=pet_user
+      - DB_PASSWORD=Shree@1650!
+      - JWT_SECRET=your_super_secret_key_change_this_in_production_environment_12345
+    depends_on:
+      - mysql
+    networks:
+      - pet-adoption-network
+
+volumes:
+  mysql_data:
+
+networks:
+  pet-adoption-network:
+    driver: bridge
