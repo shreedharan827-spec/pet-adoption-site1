@@ -23,6 +23,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SmsService smsService;
 
     /**
      * Register a new user
@@ -135,6 +136,10 @@ public class UserService {
         userRepository.save(user);
 
         System.out.println("[INFO] OTP for " + email + " is: " + otp + " (valid 10 minutes)");
+        
+        // Send OTP via SMS to registered phone
+        smsService.sendOtpSms(user.getPhoneNumber(), otp);
+        
         return otp;
     }
 
