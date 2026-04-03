@@ -1,28 +1,18 @@
-# Use Eclipse Temurin JDK 17 as base image (reliable, available image)
-FROM eclipse-temurin:17-jdk
-
-# Set working directory
+# Build stage using Maven official image
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml from repository root into backend context
-COPY backend/pom.xml .
-COPY backend/.mvn .mvn
-COPY backend/mvnw .
-
-# Make mvnw executable
-RUN chmod +x mvnw
-
-# Download dependencies (this layer will be cached if pom.xml doesn't change)
-RUN ./mvnw dependency:go-offline -B
-
-# Copy source code
+# Copy Maven project files and source code
+COPY backend/pom.xml ./
 COPY backend/src ./src
 
 # Build the application
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests -DskipTests
 
-# Expose port
+# Runtime stage
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/paws-adopt-backend-1.0.0.jar ./
+
 EXPOSE 8080
-
-# Run the application
-CMD ["java", "-jar", "target/paws-adopt-backend-1.0.0.jar"]
+CMD ["java", "-jar", "paws-adopt-backend-1.0.0.jar"]
