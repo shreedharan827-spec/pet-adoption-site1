@@ -40,10 +40,9 @@ public class SmsService {
 
             Message message = Message.creator(
                     new PhoneNumber(twilioPhoneNumber),  // From number (Twilio phone)
-                    new PhoneNumber("+91" + phoneNumber) // To number (formatted with country code)
-            )
-            .setBody(messageBody)
-            .create();
+                    new PhoneNumber("+91" + phoneNumber), // To number (formatted with country code)
+                    messageBody
+            ).create();
 
             System.out.println("[INFO] SMS sent successfully. Message SID: " + message.getSid());
 
