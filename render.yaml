@@ -71,8 +71,3 @@ databases:
       - key: API_BASE_URL
         value: https://pet-adoption-backend.onrender.com/api
 
-databases:
-  - name: pet-adoption-db
-    plan: free
-    databaseName: pet_adoption_site
-    user: petuser
