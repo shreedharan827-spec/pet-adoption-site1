@@ -5,9 +5,9 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # Copy Maven wrapper and pom.xml
-COPY backend/pom.xml .
-COPY backend/.mvn .mvn
-COPY backend/mvnw .
+COPY pom.xml .
+COPY .mvn .mvn
+COPY mvnw .
 
 # Make mvnw executable
 RUN chmod +x mvnw
@@ -16,7 +16,7 @@ RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline -B
 
 # Copy source code
-COPY backend/src ./src
+COPY src ./src
 
 # Build the application
 RUN ./mvnw clean package -DskipTests
