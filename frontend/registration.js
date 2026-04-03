@@ -1,7 +1,7 @@
 // ============================================
 // CONFIGURATION
 // ============================================
-const API_BASE_URL = window.location.protocol + '//' + window.location.hostname + ':8080/api'; // Change port for production
+const API_BASE_URL = 'https://pet-adoption-backend-9a86.onrender.com/api';
 
 // ============================================
 // FORM DATA STORAGE
