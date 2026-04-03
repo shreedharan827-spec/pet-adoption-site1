@@ -348,66 +348,6 @@
     flex: 1;
 }
 
-/* ============================================
-   OTP INPUT GROUP
-   ============================================ */
-.otp-input-group {
-    display: flex;
-    gap: 0.8rem;
-    margin-bottom: 1rem;
-}
-
-.otp-input {
-    width: 50px !important;
-    height: 50px !important;
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: bold;
-    border: 2px solid var(--light-bg) !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    padding: 0 !important;
-}
-
-.otp-input:focus {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1) !important;
-}
-
-.otp-input.error {
-    border-color: #E74C3C !important;
-    background: rgba(231, 76, 60, 0.05) !important;
-}
-
-/* ============================================
-   RESEND OTP
-   ============================================ */
-.resend-otp {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: var(--light-bg);
-    border-radius: 8px;
-    font-size: 0.9rem;
-}
-
-.resend-otp p {
-    margin: 0;
-}
-
-.link-btn {
-    background: none;
-    border: none;
-    color: var(--primary);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: underline;
-}
-
-.link-btn:hover {
     color: var(--primary-dark);
 }
 
@@ -829,16 +769,6 @@
         font-size: 0.9rem;
     }
 
-    .otp-input-group {
-        gap: 0.5rem;
-    }
-
-    .otp-input {
-        width: 40px !important;
-        height: 40px !important;
-        font-size: 1.1rem !important;
-    }
-
     .success-card,
     .error-card {
         padding: 2rem;
@@ -887,12 +817,6 @@
         font-size: 0.8rem;
     }
 
-    .otp-input {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 1rem !important;
-    }
-
     .phone-group {
         flex-direction: column;
     }
@@ -900,10 +824,6 @@
     .phone-prefix {
         width: 100%;
         text-align: center;
-    }
-
-    .otp-input-group {
-        gap: 0.4rem;
     }
 
     .success-details {

@@ -44,8 +44,6 @@ public class AppConfig {
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/pets/**").permitAll() // Allow public access to pet endpoints
                 .requestMatchers("/users/register").permitAll() // Allow user registration
-                .requestMatchers("/users/send-otp").permitAll() // Allow OTP sending
-                .requestMatchers("/users/verify-otp").permitAll() // Allow OTP verification
                 .requestMatchers("/admin/**").authenticated() // Require authentication for admin endpoints (roles checked via @PreAuthorize)
                 .anyRequest().authenticated()
             )

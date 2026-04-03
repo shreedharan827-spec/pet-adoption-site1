@@ -59,12 +59,6 @@ public class User {
     @Builder.Default
     private Boolean isActive = true;
 
-    @Column(length = 8)
-    private String otpCode;
-
-    @Column
-    private LocalDateTime otpExpiry;
-
     public enum Role {
         USER, ADMIN, SHELTER
     }

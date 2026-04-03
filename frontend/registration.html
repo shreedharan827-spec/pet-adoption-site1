@@ -259,50 +259,7 @@
         </form>
     </div>
 
-    <!-- Verification Panel - Step 3 -->
-    <div class="registration-form-wrapper hidden" id="step3-form">
-        <div class="form-header">
-            <h1>Verify Your Account</h1>
-            <p>Complete the verification process to finish registration</p>
-        </div>
-
-        <form id="step3-input" class="registration-form">
-            <!-- OTP Verification -->
-            <div class="form-group">
-                <label>OTP Verification</label>
-                <p class="info-text">We've sent a 6-digit OTP to your phone number</p>
-                <div class="otp-input-group">
-                    <input type="text" class="otp-input" maxlength="1" required>
-                    <input type="text" class="otp-input" maxlength="1" required>
-                    <input type="text" class="otp-input" maxlength="1" required>
-                    <input type="text" class="otp-input" maxlength="1" required>
-                    <input type="text" class="otp-input" maxlength="1" required>
-                    <input type="text" class="otp-input" maxlength="1" required>
-                </div>
-                <input type="hidden" id="otpValue">
-                <span class="error-message" id="otpError"></span>
-            </div>
-
-            <!-- Resend OTP -->
-            <div class="resend-otp">
-                <p>Didn't receive OTP? 
-                    <button type="button" id="resendOtp" class="link-btn">Resend OTP</button>
-                </p>
-                <span class="timer" id="otpTimer"></span>
-            </div>
-
-            <!-- Checkbox Confirmation -->
-            <div class="form-group checkbox-group">
-                <input type="checkbox" id="dataConfirm" required>
-                <label for="dataConfirm">I confirm that all the information provided is correct</label>
-                <span class="error-message" id="dataConfirmError"></span>
-            </div>
-
-            <!-- Navigation Buttons -->
-            <div class="form-buttons">
-                <button type="button" class="btn-back" id="backStep3">
-                    <span class="btn-icon">←</span>
-                    <span>Back</span>
+    <!-- Profile Page -->
                 </button>
                 <button type="submit" class="btn-register">
                     <span>Complete Registration</span>

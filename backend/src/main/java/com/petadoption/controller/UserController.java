@@ -66,58 +66,6 @@ public class UserController {
     }
 
     /**
-     * Send OTP for user registration
-     * POST /users/send-otp
-     */
-    @PostMapping("/send-otp")
-    public ResponseEntity<ApiResponse<String>> sendOtp(
-            @RequestBody com.petadoption.dto.OtpRequest request) {
-        try {
-            String otp = userService.sendOtp(request.getEmail());
-
-            return ResponseEntity.ok(
-                    new ApiResponse<>(true,
-                            "OTP sent successfully",
-                            otp,
-                            200)
-            );
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new ApiResponse<>(false,
-                            "Failed to send OTP: " + e.getMessage(),
-                            null,
-                            400)
-            );
-        }
-    }
-
-    /**
-     * Verify OTP
-     * POST /users/verify-otp
-     */
-    @PostMapping("/verify-otp")
-    public ResponseEntity<ApiResponse<UserResponse>> verifyOtp(
-            @RequestBody com.petadoption.dto.OtpVerifyRequest request) {
-        try {
-            UserResponse userResponse = userService.verifyOtp(request.getEmail(), request.getOtp());
-
-            return ResponseEntity.ok(
-                    new ApiResponse<>(true,
-                            "OTP verified successfully",
-                            userResponse,
-                            200)
-            );
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                    new ApiResponse<>(false,
-                            "OTP verification failed: " + e.getMessage(),
-                            null,
-                            400)
-            );
-        }
-    }
-
-    /**
      * Get user by ID
      * GET /users/{userId}
      */

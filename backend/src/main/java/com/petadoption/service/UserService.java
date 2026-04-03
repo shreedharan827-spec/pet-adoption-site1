@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.LocalDateTime;
 
 /**
  * Service for User Management
@@ -23,7 +22,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final SmsService smsService;
 
     /**
      * Register a new user
@@ -120,53 +118,6 @@ public class UserService {
         System.out.println("[INFO] User verified successfully with ID: " + userId);
 
         return mapToUserResponse(verifiedUser);
-    }
-
-    /**
-     * Send OTP to user
-     */
-    public String sendOtp(String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-
-        String otp = String.format("%06d", (int)(Math.random() * 1000000));
-        user.setOtpCode(otp);
-        user.setOtpExpiry(LocalDateTime.now().plusMinutes(10));
-
-        userRepository.save(user);
-
-        System.out.println("[INFO] OTP for " + email + " is: " + otp + " (valid 10 minutes)");
-        
-        // Send OTP via SMS to registered phone
-        smsService.sendOtpSms(user.getPhoneNumber(), otp);
-        
-        return otp;
-    }
-
-    /**
-     * Verify OTP for user
-     */
-    public UserResponse verifyOtp(String email, String otp) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-
-        if (user.getOtpCode() == null || user.getOtpExpiry() == null
-                || user.getOtpExpiry().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("OTP expired or not requested");
-        }
-
-        if (!user.getOtpCode().equals(otp)) {
-            throw new RuntimeException("Invalid OTP");
-        }
-
-        user.setIsVerified(true);
-        user.setOtpCode(null);
-        user.setOtpExpiry(null);
-
-        User updatedUser = userRepository.save(user);
-
-        System.out.println("[INFO] OTP verified for user " + email);
-        return mapToUserResponse(updatedUser);
     }
 
     /**
