@@ -27,7 +27,6 @@ services:
   - type: web
     name: pet-adoption-frontend
     env: static
-    plan: free
     staticPublishPath: ./frontend
     envVars:
       - key: API_BASE_URL
