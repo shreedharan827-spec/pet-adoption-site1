@@ -24,9 +24,9 @@ services:
       - key: JWT_SECRET
         value: your_super_secret_key_change_this_in_production_environment_12345
 
-  - type: static_site
+  - type: web
     name: pet-adoption-frontend
-    plan: free
+    env: static
     staticPublishPath: ./frontend
     envVars:
       - key: API_BASE_URL
