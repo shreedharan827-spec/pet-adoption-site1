@@ -76,4 +76,3 @@ databases:
     plan: free
     databaseName: pet_adoption_site
     user: petuser
->>>>>>> a3b1ad70a74962bec6be623d60fc6ddddd523b04
